@@ -54,3 +54,14 @@ CREATE TABLE invoice_items(
 
 CREATE INDEX ix_item_invoice_id ON invoice_items(invoice_id);
 CREATE INDEX ix_item_treatment_id ON invoice_items(treatment_id);
+
+-- medical_histories_has_treatments join table
+CREATE TABLE medical_histories_has_treatments(
+  treatment_id INT NOT NULL,
+  history_id INT NOT NULL,
+  FOREIGN KEY(treatment_id) REFERENCES treatments(id),
+  FOREIGN KEY(history_id) REFERENCES medical_histories(id)  
+);
+
+CREATE INDEX ix_join_treatment_id ON medical_histories_has_treatments(treatment_id);
+CREATE INDEX ix_join_history_id ON medical_histories_has_treatments(history_id);
